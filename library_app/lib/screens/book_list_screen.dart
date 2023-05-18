@@ -10,31 +10,45 @@ class BookListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 10,
+    return Stack(
+      children: [
+        Image.asset(
+          'assets/backgrounds/background.png',
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          fit: BoxFit.cover,
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Icon(Icons.search_rounded),
-              Text('Your Search Results ....')
+          body: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Icon(Icons.search_rounded),
+                  Text('Your Search Results ....')
+                ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: booklist.length,
+                  itemBuilder: (context, index) {
+                    return createBookContainer(booklist[index], context);
+                  },
+                ),
+              ),
             ],
           ),
-          Expanded(
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: booklist.length,
-              itemBuilder: (context, index) {
-                return createBookContainer(booklist[index], context);
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

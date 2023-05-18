@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:library_app/admin_screens/book_issue_screen.dart';
+import 'package:library_app/admin_screens/home_screen.dart';
+import 'package:library_app/admin_screens/return_book_screen.dart';
 import 'package:library_app/screens/book_list_screen.dart';
 import 'package:library_app/screens/book_screen.dart';
 import 'package:library_app/screens/home_screen.dart';
 import 'package:library_app/screens/login_screen.dart';
 import 'package:library_app/models/book.dart';
+import 'package:library_app/screens/user_books.dart';
 import '../screens/signup_screen.dart';
 
 class RouteGenerator {
@@ -27,6 +31,19 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) =>
                 BookListScreen(booklist: args ?? List<Book>.empty()));
+
+      case '/admin-home':
+        return MaterialPageRoute(builder: (_) => const HomeScreenAdmin());
+
+      case '/admin-book-issue':
+        return MaterialPageRoute(builder: (_) => const BookIssueScreen());
+
+      case '/admin-book-return':
+        return MaterialPageRoute(builder: (_) => const ReturnBookScreen());
+
+      case '/user-books':
+        return MaterialPageRoute(builder: (_) => const UserBooks());
+
       default:
         // If there is no such named route in the switch statement
         return _errorRoute();

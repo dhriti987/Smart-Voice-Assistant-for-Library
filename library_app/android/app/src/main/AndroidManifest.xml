@@ -13,7 +13,7 @@
         </intent>
     </queries>
    <application
-        android:label="library_app"
+        android:label="ShelfGenius"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

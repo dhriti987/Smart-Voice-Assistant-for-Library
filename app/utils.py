@@ -2,7 +2,7 @@ from nlu import NLUEngine, Status
 from tts import TTS
 from pprint import PrettyPrinter
 
-speech = TTS(3)
+speech = TTS(0)
 printer = PrettyPrinter()
 engine = NLUEngine()
 

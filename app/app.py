@@ -1,6 +1,7 @@
 import utils
 from flask import Flask, request
 from db import LibraryDatabase
+import json
 
 app = Flask(__name__)
 database = LibraryDatabase()
@@ -60,6 +61,26 @@ def login():
     else:
         return {'msg': msg}, 403
 
+@app.route('/get-user-books/<string:username>')
+def get_user_books(username):
+    return database.get_all_read_books(username)
+
+
+@app.route('/get-issued-books/<string:username>')
+def get_issued_books(username):
+    return json.dumps(database.get_all_issued_books(username), default=str)
+
+@app.route('/issue-book', methods=['POST'])
+def issue_book():
+    data = request.form.to_dict()
+    status, msg = database.issue_book(**data)
+    return {'msg':msg}, 200 if status else 404
+
+@app.route('/return-book', methods=['POST'])
+def return_book():
+    data = request.form.to_dict()
+    database.returned_book(**data)
+    return {}
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")

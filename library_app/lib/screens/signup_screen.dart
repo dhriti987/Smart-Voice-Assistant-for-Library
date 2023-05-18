@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:library_app/utilities/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,71 +13,70 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _name = TextEditingController();
+
   final TextEditingController _user = TextEditingController();
+
   final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Center(
-          child: SizedBox(
-            width: 500,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'Sign Up',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40),
-                ),
-                // const Padding(
-                //   padding: EdgeInsets.only(top: 15),
-                //   child: Text(
-                //     'Please Log in to continue',
-                //     style: TextStyle(
-                //         color: Colors.grey,
-                //         fontWeight: FontWeight.bold,
-                //         fontSize: 15),
-                //   ),
-                // ),
-                Container(
-                  margin: const EdgeInsets.only(top: 50),
-                  child: MyTextField(
-                    text: "Full Name",
-                    obscureText: false,
-                    icon: Icons.abc_outlined,
-                    textController: _name,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20),
-                  child: MyTextField(
-                    text: "Username",
-                    obscureText: false,
-                    icon: Icons.person_outline,
-                    textController: _user,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 20, bottom: 30),
-                  child: MyTextField(
-                    text: "PASSWORD",
-                    obscureText: true,
-                    icon: Icons.lock_outline_rounded,
-                    textController: _password,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ElevatedButton(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/backgrounds/background.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Form(
+          key: _formKey,
+          child: Center(
+            child: SizedBox(
+              width: 500,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Create new Account',
+                      style: Theme.of(context).textTheme.titleLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 50),
+                      child: MyTextField(
+                        text: "Full Name",
+                        obscureText: false,
+                        icon: Icons.abc_outlined,
+                        textController: _name,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20),
+                      child: MyTextField(
+                        text: "Username",
+                        obscureText: false,
+                        icon: Icons.person_outline,
+                        textController: _user,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20, bottom: 30),
+                      child: MyTextField(
+                        text: "PASSWORD",
+                        obscureText: true,
+                        icon: Icons.lock_outline_rounded,
+                        textController: _password,
+                      ),
+                    ),
+                    ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 18),
+                            horizontal: 50, vertical: 15),
                         shape: const StadiumBorder(),
                       ),
                       onPressed: () async {
@@ -105,44 +103,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           }
                         }
                       },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: const [
-                          Text(
-                            'Sign Up ',
-                          ),
-                          Icon(
-                            Icons.arrow_forward_rounded,
-                          )
-                        ],
+                      child: const Text(
+                        'Sign Up ',
                       ),
                     ),
-                  ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('Already Registered? Login',
+                          style: Theme.of(context).textTheme.titleSmall),
+                    )
+                  ],
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
-                  child: RichText(
-                    text: TextSpan(
-                      text: "Already have an account? ",
-                      style: const TextStyle(color: Colors.black, fontSize: 20),
-                      children: [
-                        TextSpan(
-                            text: 'Login',
-                            style: const TextStyle(
-                              color: Colors.blue,
-                              fontSize: 20,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.pop(context);
-                              }),
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
